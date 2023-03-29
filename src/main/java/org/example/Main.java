@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         //fazer uma conexão HTTP e pegar os top 250 filmes
-        String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
+        String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularTVs.json";
 
         var client = HttpClient.newHttpClient();
         URI endereco = URI.create(url);
@@ -30,8 +30,6 @@ public class Main {
         var geradora = new GeradoraDeFigurinhas();
 
         for (Map<String, String> filme: listaDeFilmes) {
-            double nota = Double.parseDouble(filme.get("imDbRating"));
-
             String urlImagem = filme.get("image");
             URI uri = new URI(urlImagem);
             URL novoUrl = uri.toURL();
@@ -44,12 +42,7 @@ public class Main {
             geradora.cria(inputStream, nomeArquivo);
 
             System.out.println("Título: " + "\u001b[1m" + filme.get("title") + "\u001b[m");
-            //System.out.println("Pôster: " + "\u001b[3m" + filme.get("image") + "\u001b[m");
-            //System.out.println("Nota: " + "\u001b[1m" + "\u001b[38;2;255;255;255m" + "\u001b[42m" + " " + filme.get("imDbRating") + " " + "\u001b[m");
 
-            //for (int j = 0; j <= nota; j++) {
-            //    System.out.print("\u2B50");
-            //}
             System.out.println("\n");
 
         }
