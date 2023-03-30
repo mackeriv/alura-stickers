@@ -11,6 +11,10 @@ public class Main {
 
         //fazer uma conexão HTTP e pegar os conteudos
         String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularTVs.json";
+        ExtratorDeConteudo extrator = new ExtratorIMDB();
+
+        //String url = "https://api.nasa.gov/planetary/apod?api_key=ZAnyccCrxbiJSNY1UYC4FqRfhnXsHONBGQu7lYyM&start_date=2022-06-12&end_date=2022-06-14";
+        //ExtratorDeConteudo extrator = new ExtratorNASA();
 
         var http = new ClienteHTTP();
         String json = http.buscaDados(url);
@@ -20,21 +24,21 @@ public class Main {
         List<Map<String, String>> listaDeConteudos = parser.parse(json);
 
         //exibir e manipular os dados
+        List<Conteudo> conteudos = extrator.extraiConteudos(json);
+
         var geradora = new GeradoraDeFigurinhas();
 
-        for (Map<String, String> conteudo: listaDeConteudos) {
-            String urlImagem = conteudo.get("image");
-            URI uri = new URI(urlImagem);
-            URL novoUrl = uri.toURL();
+        for (int i = 0; i < 3; i++) {
+            Conteudo conteudo = conteudos.get(i);
 
-            InputStream inputStream = novoUrl.openStream();
+            InputStream inputStream = new URL(conteudo.getUrlImagem()).openStream();
 
-            String titulo = conteudo.get("title");
+            String titulo = conteudo.getTitulo();
             String nomeArquivo = "saida/" + titulo + ".png";
 
             geradora.cria(inputStream, nomeArquivo);
 
-            System.out.println("Título: " + "\u001b[1m" + conteudo.get("title") + "\u001b[m");
+            System.out.println("Título: " + "\u001b[1m" + titulo + "\u001b[m");
 
             System.out.println("\n");
 
