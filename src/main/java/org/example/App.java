@@ -1,11 +1,12 @@
 package org.example;
 
+import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-public class Main {
+public class App {
     public static void main(String[] args) throws Exception {
 
         //fazer uma conexão HTTP e pegar os conteudos
@@ -30,7 +31,10 @@ public class Main {
 
         var geradora = new GeradoraDeFigurinhas();
 
-        for (int i = 0; i < 4; i++) {
+        var diretorio = new File("saida/");
+        diretorio.mkdir();
+
+        for (int i = 0; i <= 5; i++) {
             Conteudo conteudo = conteudos.get(i);
 
             InputStream inputStream = new URL(conteudo.getUrlImagem()).openStream();
