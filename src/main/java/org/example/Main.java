@@ -15,7 +15,7 @@ public class Main {
         //String url = "https://api.nasa.gov/planetary/apod?api_key=ZAnyccCrxbiJSNY1UYC4FqRfhnXsHONBGQu7lYyM&start_date=2022-06-12&end_date=2022-06-14";
         //ExtratorDeConteudo extrator = new ExtratorNASA();
 
-        String url = "http://localhost:8080/linguagens";
+        String url = "https://alr-linguagens.fly.dev/linguagens";
         ExtratorDeConteudo extrator = new ExtratorIMDB();
 
         var http = new ClienteHTTP();
