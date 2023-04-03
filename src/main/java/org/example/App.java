@@ -10,14 +10,14 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         //fazer uma conexão HTTP e pegar os conteudos
-        //String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularTVs.json";
-        //ExtratorDeConteudo extrator = new ExtratorIMDB();
+        String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularTVs.json";
+        ExtratorDeConteudo extrator = new ExtratorIMDB();
 
         //String url = "https://api.nasa.gov/planetary/apod?api_key=ZAnyccCrxbiJSNY1UYC4FqRfhnXsHONBGQu7lYyM&start_date=2022-06-12&end_date=2022-06-14";
         //ExtratorDeConteudo extrator = new ExtratorNASA();
 
-        String url = "https://alr-linguagens.fly.dev/linguagens";
-        ExtratorDeConteudo extrator = new ExtratorIMDB();
+        //String url = "https://alr-linguagens.fly.dev/linguagens";
+        //ExtratorDeConteudo extrator = new ExtratorIMDB();
 
         var http = new ClienteHTTP();
         String json = http.buscaDados(url);
@@ -42,7 +42,7 @@ public class App {
             String titulo = conteudo.getTitulo();
             String nomeArquivo = "saida/" + titulo + ".png";
 
-            geradora.cria(inputStream, nomeArquivo);
+            geradora.cria(inputStream, nomeArquivo, "TOPZERA");
 
             System.out.println("Título: " + "\u001b[1m" + titulo + "\u001b[m");
 
