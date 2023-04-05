@@ -10,7 +10,10 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         //fazer uma conexão HTTP e pegar os conteudos
-        String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularTVs.json";
+        //String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularTVs.json";
+        //ExtratorDeConteudo extrator = new ExtratorIMDB();
+
+        String url = "http://localhost:8080/linguagens";
         ExtratorDeConteudo extrator = new ExtratorIMDB();
 
         //String url = "https://api.nasa.gov/planetary/apod?api_key=ZAnyccCrxbiJSNY1UYC4FqRfhnXsHONBGQu7lYyM&start_date=2022-06-12&end_date=2022-06-14";
@@ -37,9 +40,9 @@ public class App {
         for (int i = 0; i <= 5; i++) {
             Conteudo conteudo = conteudos.get(i);
 
-            InputStream inputStream = new URL(conteudo.getUrlImagem()).openStream();
+            InputStream inputStream = new URL(conteudo.urlImagem()).openStream();
 
-            String titulo = conteudo.getTitulo();
+            String titulo = conteudo.titulo();
             String nomeArquivo = "saida/" + titulo + ".png";
 
             geradora.cria(inputStream, nomeArquivo, "TOPZERA");
