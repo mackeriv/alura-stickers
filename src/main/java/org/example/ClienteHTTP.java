@@ -19,7 +19,7 @@ public class ClienteHTTP {
             return response.body();
 
         } catch (IOException | InterruptedException ex) {
-            throw new RuntimeException(ex);
+            throw new ClienteHttpException("Erro ao consultar a URL");
 
         }
 
