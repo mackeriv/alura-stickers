@@ -15,15 +15,8 @@ public class ExtratorIMDB implements ExtratorDeConteudo {
         //criar lista vazia para popular
         List<Conteudo> conteudos = new ArrayList<>();
 
-        //popular a lista de conteudos
-        for (Map<String, String> atributos : listaDeAtributos) {
-            String titulo = atributos.get("title");
-            String urlImagem = atributos.get("image");
-            var conteudo = new Conteudo(titulo, urlImagem);
-
-            conteudos.add(conteudo);
-        }
-
-        return conteudos;
+        return listaDeAtributos.stream()
+                .map(atributos -> new Conteudo(atributos.get("title"), atributos.get("image")))
+                .toList();
     }
 }

@@ -10,17 +10,9 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         //fazer uma conexão HTTP e pegar os conteudos
-        //String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularTVs.json";
-        //ExtratorDeConteudo extrator = new ExtratorIMDB();
-
-        //String url = "http://localhost:8080/linguagens";
-        //ExtratorDeConteudo extrator = new ExtratorIMDB();
-
-        //String url = "https://api.nasa.gov/planetary/apod?api_key=ZAnyccCrxbiJSNY1UYC4FqRfhnXsHONBGQu7lYyM&start_date=2022-06-12&end_date=2022-06-14";
-        //ExtratorDeConteudo extrator = new ExtratorNASA();
-
-        String url = "https://alr-linguagens.fly.dev/linguagens";
-        ExtratorDeConteudo extrator = new ExtratorIMDB();
+        API api = API.IMDB;
+        String url = api.getURL();
+        ExtratorDeConteudo extrator = api.getExtrator();
 
         var http = new ClienteHTTP();
         String json = http.buscaDados(url);
@@ -52,6 +44,5 @@ public class App {
             System.out.println("\n");
 
         }
-
     }
 }

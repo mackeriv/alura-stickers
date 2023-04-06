@@ -13,17 +13,9 @@ public class ExtratorNASA implements ExtratorDeConteudo {
         List<Map<String, String>> listaDeAtributos = parser.parse(json);
 
         //criar lista vazia para popular
-        List<Conteudo> conteudos = new ArrayList<>();
+        return listaDeAtributos.stream()
+            .map(atributos -> new Conteudo(atributos.get("title"), atributos.get("url")))
+            .toList();
 
-        //popular a lista de conteudos
-        for (Map<String, String> atributos : listaDeAtributos) {
-            String titulo = atributos.get("title");
-            String urlImagem = atributos.get("url");
-            var conteudo = new Conteudo(titulo, urlImagem);
-
-            conteudos.add(conteudo);
-        }
-
-        return conteudos;
     }
 }
