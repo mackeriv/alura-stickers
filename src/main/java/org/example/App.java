@@ -10,7 +10,7 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         //fazer uma conexão HTTP e pegar os conteudos
-        API api = API.IMDB;
+        API api = API.FLY;
         String url = api.getURL();
         ExtratorDeConteudo extrator = api.getExtrator();
 
