@@ -4,43 +4,37 @@ import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
-import java.util.Map;
 
 public class App {
     public static void main(String[] args) throws Exception {
 
-        //fazer uma conexão HTTP e pegar os conteudos
-        API api = API.FLY;
+        //creates an HTTP connection to retrieve data
+        API api = API.IMDB;
         String url = api.getURL();
-        ExtratorDeConteudo extrator = api.getExtrator();
+        ContentExtractor extractor = api.getExtractor();
 
-        var http = new ClienteHTTP();
-        String json = http.buscaDados(url);
+        var http = new HttpClient();
+        String json = http.retrieveData(url);
 
-        //extrair só os dados que interessam (titulo, poster, classificação)
-        var parser = new JsonParser();
-        List<Map<String, String>> listaDeConteudos = parser.parse(json);
+        //uses the JSON contents to generate PNG files in the "output" directory, with custom text
+        List<Content> contents = extractor.extractContent(json);
 
-        //exibir e manipular os dados
-        List<Conteudo> conteudos = extrator.extraiConteudos(json);
+        var generator = new StickerGenerator();
 
-        var geradora = new GeradoraDeFigurinhas();
-
-        var diretorio = new File("saida/");
-        diretorio.mkdir();
+        var directory = new File("output/");
+        directory.mkdir();
 
         for (int i = 0; i <= 5; i++) {
-            Conteudo conteudo = conteudos.get(i);
+            Content content = contents.get(i);
 
-            InputStream inputStream = new URL(conteudo.urlImagem()).openStream();
+            InputStream inputStream = new URL(content.imageUrl()).openStream();
 
-            String titulo = conteudo.titulo();
-            String nomeArquivo = "saida/" + titulo + ".png";
+            String title = content.title();
+            String fileName = "output/" + title + ".png";
 
-            geradora.cria(inputStream, nomeArquivo, "TOPZERA");
+            generator.create(inputStream, fileName, "AWESOME");
 
-            System.out.println("Título: " + "\u001b[1m" + titulo + "\u001b[m");
-
+            System.out.println("Title: " + "\u001b[1m" + title + "\u001b[m");
             System.out.println("\n");
 
         }

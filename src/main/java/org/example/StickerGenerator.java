@@ -10,9 +10,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
 
-public class GeradoraDeFigurinhas {
+public class StickerGenerator {
 
-    public void cria(InputStream inputStream, String nomeArquivo, String texto) throws Exception {
+    public void create(InputStream inputStream, String fileName, String text) throws Exception {
 
         //leitura da imagem
         BufferedImage imagemOriginal = ImageIO.read(inputStream);
@@ -34,15 +34,15 @@ public class GeradoraDeFigurinhas {
 
         //escrever uma frase na nova imagem
         FontMetrics fontMetrics = graphics.getFontMetrics();
-        Rectangle2D rectangle = fontMetrics.getStringBounds(texto, graphics);
+        Rectangle2D rectangle = fontMetrics.getStringBounds(text, graphics);
         int larguraTexto = (int) rectangle.getWidth();
         int posicaoTextoX = (largura - larguraTexto)/2;
         int posicaoTextoY = novaAltura-55;
-        graphics.drawString(texto, posicaoTextoX, posicaoTextoY);
+        graphics.drawString(text, posicaoTextoX, posicaoTextoY);
 
         //configurar contorno
         FontRenderContext fontRenderContext = graphics.getFontRenderContext();
-        TextLayout textLayout = new TextLayout(texto, fonte, fontRenderContext);
+        TextLayout textLayout = new TextLayout(text, fonte, fontRenderContext);
 
         Shape outline = textLayout.getOutline(null);
         AffineTransform transform = graphics.getTransform();
@@ -57,7 +57,7 @@ public class GeradoraDeFigurinhas {
         graphics.setClip(outline);
 
         //escrever a nova imagem em um arquivo
-        ImageIO.write(novaImagem, "png", new File(nomeArquivo));
+        ImageIO.write(novaImagem, "png", new File(fileName));
 
     }
 }
