@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
-//teste
+//testing
 
 public class App {
     public static void main(String[] args) throws Exception {
