@@ -9,7 +9,7 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         //creates an HTTP connection to retrieve data
-        API api = API.IMDB;
+        API api = API.FLY;
         String url = api.getURL();
         ContentExtractor extractor = api.getExtractor();
 
@@ -24,7 +24,7 @@ public class App {
         var directory = new File("output/");
         directory.mkdir();
 
-        for (int i = 0; i <= 5; i++) {
+        for (int i = 0; i < 5; i++) {
             Content content = contents.get(i);
 
             InputStream inputStream = new URL(content.imageUrl()).openStream();

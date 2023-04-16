@@ -14,50 +14,50 @@ public class StickerGenerator {
 
     public void create(InputStream inputStream, String fileName, String text) throws Exception {
 
-        //leitura da imagem
-        BufferedImage imagemOriginal = ImageIO.read(inputStream);
+        //reads image
+        BufferedImage originalImage = ImageIO.read(inputStream);
 
-        //cria nova imagem em memória com transparência e novo tamanho
-        int largura = imagemOriginal.getWidth();
-        int altura = imagemOriginal.getHeight();
-        int novaAltura = altura + 200;
-        BufferedImage novaImagem = new BufferedImage(largura, novaAltura, BufferedImage.TRANSLUCENT);
+        //creates a new transparent canvas with increased height
+        int width = originalImage.getWidth();
+        int height = originalImage.getHeight();
+        int newHeight = height + 200;
+        BufferedImage newImage = new BufferedImage(width, newHeight, BufferedImage.TRANSLUCENT);
 
-        //copiar a imagem original para nova imagem (em memória)
-        Graphics2D graphics = (Graphics2D) novaImagem.getGraphics();
-        graphics.drawImage(imagemOriginal, 0, 0, null);
+        //copy the original image to the transparent canvas (in memory)
+        Graphics2D graphics = (Graphics2D) newImage.getGraphics();
+        graphics.drawImage(originalImage, 0, 0, null);
 
-        //configurar a fonte
-        var fonte = new Font("Impact", Font.PLAIN, 60);
+        //setting-up font
+        var font = new Font("Impact", Font.PLAIN, 60);
         graphics.setColor(Color.MAGENTA);
-        graphics.setFont(fonte);
+        graphics.setFont(font);
 
-        //escrever uma frase na nova imagem
+        //places text in the new image
         FontMetrics fontMetrics = graphics.getFontMetrics();
         Rectangle2D rectangle = fontMetrics.getStringBounds(text, graphics);
-        int larguraTexto = (int) rectangle.getWidth();
-        int posicaoTextoX = (largura - larguraTexto)/2;
-        int posicaoTextoY = novaAltura-55;
-        graphics.drawString(text, posicaoTextoX, posicaoTextoY);
+        int textWidth = (int) rectangle.getWidth();
+        int textPositionX = (width - textWidth)/2;
+        int textPositionY = newHeight-55;
+        graphics.drawString(text, textPositionX, textPositionY);
 
-        //configurar contorno
+        //setting-up an outline (stroke)
         FontRenderContext fontRenderContext = graphics.getFontRenderContext();
-        TextLayout textLayout = new TextLayout(text, fonte, fontRenderContext);
+        TextLayout textLayout = new TextLayout(text, font, fontRenderContext);
 
         Shape outline = textLayout.getOutline(null);
         AffineTransform transform = graphics.getTransform();
-        transform.translate(posicaoTextoX, posicaoTextoY);
+        transform.translate(textPositionX, textPositionY);
         graphics.setTransform(transform);
 
-        var outlineStroke = new BasicStroke(largura * 0.008f);
+        var outlineStroke = new BasicStroke(width * 0.008f);
         graphics.setStroke(outlineStroke);
 
         graphics.setColor(Color.BLACK);
         graphics.draw(outline);
         graphics.setClip(outline);
 
-        //escrever a nova imagem em um arquivo
-        ImageIO.write(novaImagem, "png", new File(fileName));
+        //save the new image in a file
+        ImageIO.write(newImage, "png", new File(fileName));
 
     }
 }
