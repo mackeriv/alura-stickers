@@ -31,8 +31,8 @@ public class JsonParser {
             Matcher matcherAttributesJson = REGEX_JSON_ATTRIBUTES.matcher(item);
             while (matcherAttributesJson.find()) {
                 String attributes = matcherAttributesJson.group(1);
-                String valor = matcherAttributesJson.group(2);
-                itemAttributes.put(attributes, valor);
+                String value = matcherAttributesJson.group(2);
+                itemAttributes.put(attributes, value);
             }
 
 

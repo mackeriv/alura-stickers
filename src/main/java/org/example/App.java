@@ -9,7 +9,7 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         //creates an HTTP connection to retrieve data
-        API api = API.FLY;
+        API api = API.IMDB;
         String url = api.getURL();
         ContentExtractor extractor = api.getExtractor();
 
