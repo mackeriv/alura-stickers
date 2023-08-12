@@ -1,6 +1,6 @@
 # Sticker Generator (Alura exercise)
 
-A project intended for generating messenger-style stickers from various API JSON sources:
+A project intended for generating messenger-style stickers from various API JSON sources. The program creates an HTTP connection to an API in order to download images and saves them locally after drawing custom text on them:
 
 ![screenshot1](images/1.png)
 
