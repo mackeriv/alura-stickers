@@ -8,6 +8,10 @@ import java.util.List;
 public class App {
     public static void main(String[] args) throws Exception {
 
+        var generator = new StickerGenerator();
+        var directory = new File("output/");
+        directory.mkdir();
+
         //creates an HTTP connection to retrieve data
         API api = API.IMDB;
         String url = api.getURL();
@@ -16,14 +20,9 @@ public class App {
         var http = new HttpClient();
         String json = http.retrieveData(url);
 
-        //uses the JSON contents to generate PNG files in the "output" directory, with custom text
         List<Content> contents = extractor.extractContent(json);
 
-        var generator = new StickerGenerator();
-
-        var directory = new File("output/");
-        directory.mkdir();
-
+        //uses the JSON contents to generate PNG files in the "output" directory, with custom text
         for (int i = 0; i < 5; i++) {
             Content content = contents.get(i);
 

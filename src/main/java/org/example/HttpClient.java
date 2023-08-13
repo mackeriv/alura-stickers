@@ -7,6 +7,7 @@ import java.net.http.HttpResponse;
 
 public class HttpClient {
 
+    //deals with the HTTP connection and returns raw JSON data
     public String retrieveData(String url) {
 
         try {
@@ -21,6 +22,5 @@ public class HttpClient {
             throw new HttpClientException("Error: Can't retrieve URL");
 
         }
-
     }
 }
